@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
+</head>
+<body>
+  <div id="main">
+    <div class="side">
+      <h4>Sasta Vs Code</h4>
+      <div class="line"></div>
+      <div class="fileicon">
+        <h5>folder name</h5>
+        <div class="icons">
+          <i id="filecreate" class="ri-file-add-fill"></i>
+          <i id="foldercreate" class="ri-folder-add-fill"></i>
+          <i class="ri-refresh-fill"></i>
+        </div>
+      </div>
+      <form class="formfile" id="fileform" action="filecreate" method="get">
+        <input name="filename" type="text" placeholder="filename">
+      </form>
+      <form class="formfile" name="foldername" id="folderform" action="foldercreate">
+        <input name="foldername" type="text" placeholder="foldername">
+      </form>
+      <div class="files">
+        <!-- yha hmne jo backend se files bheji h usme se single single files ko nikal rhe h elem naam se -->
+        <% files.forEach(function(elem){ %>
+         <div class="file">
+          <!-- yha hm bs ye dikhana chahte h ki file konsi h or folder konsa h -->
+          <% if(elem.isDirectory()){  %>
+            <i class="ri-folder-line"></i>
+            <%   } else {  %>
+              <i class="ri-file-2-line"></i>
+             <%  } %>
+
+             <!-- yha hm sirf file open krna chahte h na ki folder isiliye hmne sirf file ka route bnaya h folder k liye thodi mehnat or lagegi -->
+             <% if(elem.isDirectory()){ %>
+              <h5><%= elem.name %></h5>
+              <%  } else {  %>
+              <a href="/file/<%= elem.name %>"> <h5><%= elem.name %></h5></a> 
+        <%   } %>
+         </div>
+          <%  }) %>
+      </div>
+    </div>
+    <div class="right">
+   <div class="rightnav">
+    <div class="openfile">
+      <%= filename%>
+     <a href="/"> <i class="ri-close-circle-fill"></i></a>
+    </div>
+   </div>
+   <form action="/filechange/<%= filename%>" method="post">
+    <textarea name="filedata">
+      <%= filedata%>
+    </textarea>
+  <input type="submit" id="buttonsave" value="save file">
+   </form>
+      <!-- <small>nothing here</small> -->
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+  <script src="/javascripts/script.js"></script>
+</body>
+</html>
